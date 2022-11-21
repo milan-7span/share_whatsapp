@@ -1,9 +1,5 @@
-import 'package:cross_file/cross_file.dart';
-
 import 'share_whatsapp_platform_interface.dart';
 import 'src/enums.dart';
-
-export 'package:cross_file/cross_file.dart';
 
 export 'share_whatsapp_url.dart';
 export 'src/enums.dart' show WhatsApp;
@@ -35,9 +31,9 @@ class ShareWhatsapp {
   ///
   /// [phone] is optional for Android, mandatory for Web, MacOS, Linux and Windows.
   /// But it will be ignored on iOS.
-  Future<bool> shareFile(XFile file,
+  Future<bool> shareFile(String filePath,
           {String? phone, WhatsApp type = WhatsApp.standard}) =>
-      share(type: type, file: file, phone: phone);
+      share(type: type, filePath: filePath, phone: phone);
 
   /// Share text message and or file into whatsapp
   ///
@@ -49,11 +45,13 @@ class ShareWhatsapp {
     WhatsApp type = WhatsApp.standard,
     String? phone,
     String? text,
-    XFile? file,
+    String? filePath,
+    String? contentType,
   }) {
-    assert(!(text == null && file == null), "Either set text and or file");
+    assert(
+        !(text == null && filePath == null), "Either set text and or filepath");
 
     return ShareWhatsappPlatform.instance
-        .share(type: type, phone: phone, text: text, file: file);
+        .share(type: type, phone: phone, text: text, filePath: filePath);
   }
 }

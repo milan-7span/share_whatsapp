@@ -1,4 +1,3 @@
-import 'package:cross_file/cross_file.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
 import 'share_whatsapp_method_channel.dart';
@@ -33,7 +32,7 @@ abstract class ShareWhatsappPlatform extends PlatformInterface {
     WhatsApp type = WhatsApp.standard,
     String? phone,
     String? text,
-    XFile? file,
+    String? filePath,
   }) {
     throw UnimplementedError('share() has not been implemented.');
   }

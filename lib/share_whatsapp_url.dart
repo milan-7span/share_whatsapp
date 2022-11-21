@@ -23,7 +23,7 @@ class ShareWhatsappUrl extends ShareWhatsappPlatform {
     WhatsApp type = WhatsApp.standard,
     String? phone,
     String? text,
-    XFile? file,
+    String? filePath,
   }) async {
     assert(phone != null, 'Phone parameter is required');
     assert(text != null, 'Text parameter is required');

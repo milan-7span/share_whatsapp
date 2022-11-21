@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:flimer/flimer.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:share_whatsapp/share_whatsapp.dart';
@@ -85,30 +85,40 @@ class _MyAppState extends State<MyApp> {
                 title: const Text('Share Image'),
                 trailing: const Icon(Icons.share),
                 onTap: () async {
-                  final file = await flimer.pickImage();
-                  if (file != null) {
-                    shareWhatsapp.shareFile(file);
-                  }
+                  // final file = await flimer.pickImage();
+                  // if (file != null) {
+                  //   shareWhatsapp.shareFile(file.path);
+                  // }
                 },
               ),
               ListTile(
                 title: const Text('Share Text & Image'),
                 trailing: const Icon(Icons.share),
                 onTap: () async {
-                  final file = await flimer.pickImage();
-                  if (file != null) {
-                    shareWhatsapp.share(text: _kTextMessage, file: file);
-                  }
+                  // final file = await flimer.pickImage();
+                  // if (file != null) {
+                  //   shareWhatsapp.share(text: _kTextMessage, filePath: file.path);
+                  // }
                 },
               ),
               ListTile(
                 title: const Text('Share Text on Specific Phone Number'),
                 trailing: const Icon(Icons.share),
-                onTap: () => shareWhatsapp.share(
-                  text: _kTextMessage,
-                  // change with real whatsapp number
-                  phone: '+0 000-0000-00000',
-                ),
+                onTap: () async {
+                  final FilePickerResult? result =
+                      await FilePicker.platform.pickFiles();
+                  if (result?.files[0] != null) {
+                    // shareWhatsapp.share(
+                    //     text: _kTextMessage, filePath: result?.files[0].path);
+
+                    shareWhatsapp.share(
+                        text: _kTextMessage,
+                        // change with real whatsapp number
+                        phone: '+0 000-0000-00000',
+                        filePath: result?.files[0].path,
+                        contentType: 'application/pdf');
+                  }
+                },
               ),
             ],
           ).toList(),
